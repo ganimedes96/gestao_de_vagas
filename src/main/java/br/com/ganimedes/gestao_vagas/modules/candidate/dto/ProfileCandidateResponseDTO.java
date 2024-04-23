@@ -2,6 +2,7 @@ package br.com.ganimedes.gestao_vagas.modules.candidate.dto;
 
 import java.util.UUID;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +13,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfileCandidateResponseDTO {
-  private String name;
-  private String email;
+  @Schema(example = "Desenvolvedora Java")
+  private String description;
+
+  @Schema(example = "maria")
   private String username;
-  private String desciption;
+
+  @Schema(example = "maria@gmail.com")
+  private String email;
   private UUID id;
+
+  @Schema(example = "Maria de Souza")
+  private String name;
 
 }

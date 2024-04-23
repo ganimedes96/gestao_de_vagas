@@ -9,16 +9,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ganimedes.gestao_vagas.modules.candidate.entity.CandidateEntity;
 import br.com.ganimedes.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/candidate")
+@Tag(name = "Candidato", description = "Informações do candidato")
 public class CandidateController {
 
   @Autowired
   private CreateCandidateUseCase createCandidateUseCase;
 
   @PostMapping("/")
+  @Operation(summary = "Cadastro de candidato", description = "Essa função é responsável por cadastrar um candidato")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", content = {
+        @Content(schema = @Schema(implementation = CandidateEntity.class))  
+      }),
+      @ApiResponse(responseCode = "400", description = "Usuário já existe")
+  })
   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity ) {
     try {
       var result = this.createCandidateUseCase.execute(candidateEntity);

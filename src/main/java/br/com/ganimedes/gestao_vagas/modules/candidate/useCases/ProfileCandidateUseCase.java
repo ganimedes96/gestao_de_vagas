@@ -21,7 +21,7 @@ public class ProfileCandidateUseCase {
       throw new UserFoundException("User not found");
     });
     var candidateDTO = ProfileCandidateResponseDTO.builder()
-    .desciption(candidate.getDescription())
+    .description(candidate.getDescription())
     .email(candidate.getEmail())
     .name(candidate.getName())
     .username(candidate.getUsername())
